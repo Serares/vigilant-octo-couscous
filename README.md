@@ -17,3 +17,21 @@ You can find the logs of the services in `log.log` files in each service directo
 ![Log Files](./others/log-files.png)
 
 
+Hardcoded the bellow values to not use all the available requests from the api and use the cache instead
+You can use the random values to check the api requests to exchange
+```
+func generate(id int) casino.Event {
+	// amount, currency := randomAmountCurrency()
+
+	return casino.Event{
+		ID:        id,
+		PlayerID:  10 + rand.Intn(10),
+		GameID:    100 + rand.Intn(10),
+		Type:      randomType(),
+		Amount:    13, <--- hardcoded values 
+		Currency:  "USD", <---
+		HasWon:    randomHasWon(),
+		CreatedAt: time.Now(),
+	}
+}
+```
