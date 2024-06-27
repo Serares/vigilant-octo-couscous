@@ -15,13 +15,16 @@ fi
 
 CONNECTION_STRING=""
 if $IS_LOCAL; then
-    CONNECTION_STRING="user=${DB_USER} dbname=${DB_NAME} sslmode=disabled"
+    CONNECTION_STRING="password=casino user=casino dbname=casino sslmode=disabled"
 fi
 
 # Run Goose migrations
 echo "Running Goose migrations..."
 echo "Connection string: $CONNECTION_STRING"
-cd "db/migrations"
-goose postgres "${CONNECTION_STRING}" $GOOSE_COMMAND
+# cd "./db/migrations"
+goose up
 
 echo "Migration completed."
+echo "Provisioning services..."
+
+sh ./scripts/run_services.sh
